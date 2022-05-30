@@ -57,16 +57,55 @@ public class PostagemController {
 	}
 	
 	@PutMapping
-	public ResponseEntity <Postagem> putPostagem(@Valid @RequestBody Postagem postagem){
-		return ResponseEntity.status(HttpStatus.OK).body(postagemRepository.save(postagem));
+	public ResponseEntity <Postagem> putPostagem (@Valid @RequestBody Postagem postagem){
+		return postagemRepository.findById(postagem.getId())
+				.map(resposta -> ResponseEntity.ok().body(postagemRepository.save(postagem)))
+				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@DeleteMapping ("/{id}")
-	public void deletePostagem (@PathVariable Long id) {
-		postagemRepository.deleteById(id);
+	public ResponseEntity<?> deletePostagem(@PathVariable Long id){
+		
+		return postagemRepository.findById(id)
+				.map(resposta -> {
+					postagemRepository.deleteById(id);
+					return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+				})
+				.orElse(ResponseEntity.notFound().build());
 	}
+	
+	/*VÁRIAS FORMAS DE ALCANÇAR O MESMO OBJETIVO:
+	*
+	* @PutMapping
+	* public ResponseEntity <Postagem> putPostagem(@Valid @RequestBody Postagem postagem){
+	*	return ResponseEntity.status(HttpStatus.OK).body(postagemRepository.save(postagem));
+	*
+	*
+	* @DeleteMapping ("/{id}")
+	* public void deletePostagem (@PathVariable Long id) {
+	*	postagemRepository.deleteById(id);
+	*}
+	*
+	* @PutMapping
+	* public ResponseEntity <Postagem> putPostagem (@Valid @RequestBody Postagem postagem){
+	*	if(postagem.getId() == null)
+	*		return ResponseEntity.badRequest().build();
+	*	return postagemRepository.findById(postagem.getId())
+	*			.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(postagemRepository.save(postagem)))
+	*			.orElse(ResponseEntity.badRequest().build());
+	* }
+	*
+	* @DeleteMapping ("/{id}")
+	* @ResponseStatus(HttpStatus.NO_CONTENT)
+	* public void deletePostagem(@PathVariable Long id) {
+	*	Optional <Postagem> resposta = postagemRepository.findById(id);
+	*	if (resposta.isPresent())
+	*		ResponseEntity.ok(resposta);
+	*	else 
+	*		ResponseEntity.notFound().build();
+	* }
+	*/
 	
 	
 	
 }
-
