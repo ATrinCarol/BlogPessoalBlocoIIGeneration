@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.generation.blogpessoal.model.Postagem;
 //"postagemRepository" com p minusculo que ativou esse import
-import com.generation.blogpessoal.repository.PostagemRepository; 
+import com.generation.blogpessoal.repository.PostagemRepository;
+import com.generation.blogpessoal.repository.TemaRepository; 
 
 
 
@@ -30,6 +31,9 @@ public class PostagemController {
 	
 	@Autowired
 	private PostagemRepository postagemRepository; 
+	
+	@Autowired
+	private TemaRepository temaRepository;
 	
 	@GetMapping
 	public ResponseEntity<List<Postagem>> getAll (){ //criando o método "getAll"
@@ -73,6 +77,30 @@ public class PostagemController {
 				})
 				.orElse(ResponseEntity.notFound().build());
 	}
+	
+	@PostMapping
+	public ResponseEntity <Postagem> postarPostagem (@Valid @RequestBody Postagem postagem){
+		if (postagem.getTema().getId() == null ||
+				!temaRepository.existsById(postagem.getTema().getId())) {
+			return ResponseEntity.badRequest().build();
+		}
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(postagemRepository.save(postagem));
+			
+	}
+	
+	@PutMapping
+	public ResponseEntity <Postagem> putarPostagem (@Valid @RequestBody Postagem postagem){
+		if (postagem.getId() == null ||
+				postagem.getTema().getId() == null ||
+				!temaRepository.existsById(postagem.getTema().getId())) {
+			return ResponseEntity.badRequest().build();
+		}
+		
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(postagemRepository.save(postagem));
+		
+	}
+	
 	
 	/*VÁRIAS FORMAS DE ALCANÇAR O MESMO OBJETIVO:
 	*
