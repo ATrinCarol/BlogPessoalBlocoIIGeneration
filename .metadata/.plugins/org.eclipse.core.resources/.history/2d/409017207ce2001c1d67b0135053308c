@@ -1,0 +1,21 @@
+package com.generation.nostalgames.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+@Table (name = "tb_categorias")
+public class Categoria {
+	
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@NotBlank (message = "A coluna/atributo descrição precisa ser preenchida")
+	private String descricao;
+
+}

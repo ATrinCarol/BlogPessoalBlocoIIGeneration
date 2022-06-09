@@ -1,0 +1,20 @@
+package com.generation.nostalgames.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "tb_produtos")
+public class Produto {
+
+	private Long id;
+	
+	private String nome;
+	
+	private BigDecimal preco;
+	
+	private String foto;
+	
+	
+	
+}
