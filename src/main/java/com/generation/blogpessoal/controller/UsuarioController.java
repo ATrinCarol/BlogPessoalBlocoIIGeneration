@@ -40,6 +40,14 @@ public class UsuarioController {
 		
 	}
 	
+	@GetMapping("/email/{usuario}")
+	public ResponseEntity<Usuario> getByUsuario(@PathVariable String usuario) {
+
+		return usuarioRepository.findByUsuarioContainingIgnoreCase(usuario)
+				.map (resposta -> ResponseEntity.ok(resposta))
+				.orElse(ResponseEntity.notFound().build());
+		};
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> getById(@PathVariable Long id) {
 		return usuarioRepository.findById(id)
