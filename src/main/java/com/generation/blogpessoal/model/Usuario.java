@@ -17,29 +17,46 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table (name = "tb_usuarios")
+@Table(name = "tb_usuarios")
 public class Usuario {
-	
+
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotNull (message = "Você precisa escrever um nome!")
+
+	@NotNull(message = "Você precisa escrever um nome!")
 	private String nome;
-	
-	@NotNull (message = "Você precisa escrever um usuário!")
-	@Email (message = "Esse usuário precisa ser um endereço de e-mail!")
+
+	@NotNull(message = "Você precisa escrever um usuário!")
+	@Email(message = "Esse usuário precisa ser um endereço de e-mail!")
 	private String usuario;
-	
-	@NotBlank (message = "Você precisa escrever uma senha!")
-	@Size (min=8, message = "A senha que escreveu precisa ter no mínimo 8 caracteres!")
+
+	@NotBlank(message = "Você precisa escrever uma senha!")
+	@Size(min = 8, message = "A senha que escreveu precisa ter no mínimo 8 caracteres!")
 	private String senha;
-	
+
 	private String foto;
-	
-	@OneToMany (mappedBy = "usuario", cascade = CascadeType.REMOVE)
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
+
+	// Primeiro método Construtor (com parâmetros)
+
+	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+	}
+
+	// Segundo método Construtor (vazio, sem parâmetros
+
+	public Usuario() {
+	}
+
+	// Getters e Setters
 
 	public Long getId() {
 		return id;
@@ -88,7 +105,5 @@ public class Usuario {
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-	
-	
 
 }
