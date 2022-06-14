@@ -1,5 +1,0 @@
-package com.generation.farmabicalegal.repository;
-
-public interface CategoriaRepository {
-
-}

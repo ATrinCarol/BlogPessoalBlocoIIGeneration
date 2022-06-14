@@ -1,6 +1,0 @@
-package com.generation.nostalgames.repository;
-
-
-public interface ProdutoRepository {
-
-}

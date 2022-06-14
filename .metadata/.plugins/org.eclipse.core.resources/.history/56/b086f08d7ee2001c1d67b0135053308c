@@ -1,5 +1,0 @@
-package com.generation.nostalgames.repository;
-
-public interface CategoriaRepository {
-
-}

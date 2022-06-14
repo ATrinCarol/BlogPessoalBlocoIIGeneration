@@ -1,9 +1,0 @@
-package com.generation.farmabicalegal.model;
-
-public class Categoria {
-	
-	private Long ig;
-	
-	private String 
-
-}

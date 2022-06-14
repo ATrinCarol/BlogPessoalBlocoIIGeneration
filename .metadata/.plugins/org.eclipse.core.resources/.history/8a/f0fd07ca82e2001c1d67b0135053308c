@@ -1,8 +1,0 @@
-package com.generation.nostalgames.controller;
-
-
-@RestController
-@RequestMapping 
-public class CategoriaController {
-
-}
