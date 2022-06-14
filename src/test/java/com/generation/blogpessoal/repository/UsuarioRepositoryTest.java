@@ -61,6 +61,7 @@ public class UsuarioRepositoryTest {
 	@DisplayName("Retorna id")
 	public void deveRetornarUmId() {
 		
+    	//teste de ambiente controlado
 		Optional<Usuario> usuario = usuarioRepository.findById((long) 1);
 		assertTrue(usuario.get().getId().equals((long) 1));
 	}
