@@ -23,7 +23,7 @@ public class SwaggerConfig {
 					.description("Blog Pessoal desenvolvido no bootcamp Generation Brasil - Turma 53")
 					.version("v0.0.1")
 				.license(new License()
-					.name("Caroline Trindade")
+					.name("Carol Trindade")
 					.url("https://www.linkedin.com/in/atrindadecarol/"))
 				.contact(new Contact()
 					.name("Repositório do projeto")
