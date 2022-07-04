@@ -39,6 +39,8 @@ public class Usuario {
 	private String senha;
 
 	private String foto;
+	
+	private String tipo;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
@@ -46,12 +48,13 @@ public class Usuario {
 
 	// Primeiro método Construtor (com parâmetros)
 
-	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+	public Usuario(Long id, String nome, String usuario, String senha, String foto, String tipo) {
 		this.id = id;
 		this.nome = nome;
 		this.usuario = usuario;
 		this.senha = senha;
 		this.foto = foto;
+		this.tipo = tipo;
 	}
 
 	// Segundo método Construtor (vazio, sem parâmetros
@@ -107,6 +110,14 @@ public class Usuario {
 
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }
