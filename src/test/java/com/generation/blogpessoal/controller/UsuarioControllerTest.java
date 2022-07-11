@@ -109,7 +109,7 @@ public class UsuarioControllerTest {
 				new Usuario(0L, "Carol Persistente Trindade", "carol.htinha@email.com.br", "carol12345", "", ""));
 
 		HttpEntity<UsuarioLogin> requisicao = new HttpEntity<UsuarioLogin>(
-				new UsuarioLogin(0L, "", "carol.htinha@email.com.br", "carol12345", "", ""));
+				new UsuarioLogin(0L, "", "carol.htinha@email.com.br", "carol12345", "", "", ""));
 
 		ResponseEntity<UsuarioLogin> resposta = testRestTemplate.exchange("/usuarios/logar", HttpMethod.POST,
 				requisicao, UsuarioLogin.class);
