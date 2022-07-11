@@ -39,9 +39,10 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 	 protected void configure(HttpSecurity http) throws Exception {
 		 
 		 http.authorizeRequests()
-		 	.antMatchers("/**").permitAll()
+		 	//.antMatchers("/**").permitAll() - solução para get postagem por id,porém está liberando todas as rotas sem o token. Então para segurança, não é uma boa prática
 			.antMatchers("/usuarios/logar").permitAll()
 			.antMatchers("/usuarios/cadastrar").permitAll()
+			.antMatchers(HttpMethod.GET ,"/usuarios").permitAll()
 			.antMatchers(HttpMethod.OPTIONS).permitAll()
 			.anyRequest().authenticated()
 			.and().httpBasic()
