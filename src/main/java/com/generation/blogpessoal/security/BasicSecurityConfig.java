@@ -42,6 +42,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		 	.antMatchers(HttpMethod.GET,"/usuarios/*").permitAll() //solução Geandro pós erro em buscar usuário por id
 		 	.antMatchers("/usuarios/logar").permitAll()
 			.antMatchers("/usuarios/cadastrar").permitAll()
+			.antMatchers(HttpMethod.PUT, "/usuarios/atualizar").permitAll()
 			.antMatchers(HttpMethod.OPTIONS).permitAll()
 			.anyRequest().authenticated()
 			.and().httpBasic()
